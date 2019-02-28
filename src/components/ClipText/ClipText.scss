@@ -1,0 +1,43 @@
+.bg-transparent {
+  background: transparent;
+}
+
+.clip-text {
+  font-size: 5em;
+  font-weight: bold;
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+  margin: .25em;
+  padding: .5em .75em;
+  text-align: center;
+  color: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: url(./ClipText.jpg);
+}
+
+.clip-text:before,
+.clip-text:after {
+  position: absolute;
+  content: '';
+}
+
+.clip-text:before {
+  z-index: -2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: inherit;
+}
+
+.clip-text:after {
+  position: absolute;
+  z-index: -1;
+  top: 20px;
+  right: 100px;
+  bottom: 20px;
+  left: 100px;
+  background-color: #000;
+}
