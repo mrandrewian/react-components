@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ClipText() {
   return (
-    <div class="clip-text clip-text_one">
+    <div className="clip-text">
       AND
       <br />
       REW

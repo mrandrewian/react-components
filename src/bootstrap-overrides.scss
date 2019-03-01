@@ -1,0 +1,11 @@
+$font-family-base: 'Source Sans Pro', sans-serif;
+
+$card-cap-bg: rgba(255, 255, 255, .1);
+$card-border-color: rgba(255, 255, 255, .2);
+
+// Your variable overrides
+$body-bg: var(--gray-dark);
+$body-color: var(--light);
+
+// Bootstrap and its default variables
+@import "node_modules/bootstrap/scss/bootstrap";

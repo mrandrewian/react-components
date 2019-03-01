@@ -1,0 +1,13 @@
+.animated-counter {
+
+  .card-text {
+    background: var(--gray);
+    font-size: 80px;
+
+    span {
+      opacity: .1;
+      transition: 1s opacity;
+    }
+  }
+
+}
