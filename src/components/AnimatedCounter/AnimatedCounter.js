@@ -14,16 +14,20 @@ import "./AnimatedCounter.scss";
 const config = { mass: 1, tension: 200, friction: 20 };
 
 const AnimatedCounter = () => {
+  // eslint-disable-next-line
   let [delay, setDelay] = useState(1000),
     [isRunning, setIsRunning] = useState(true),
     [rawNumber, setRawNumber] = useState(0),
+    [totalIncrement, setTotalIncrement] = useState(1),
     [numberArray, setNumberArray] = useState(numberToArray(0));
 
   const trail = useTrail(numberArray.length, {
     config,
     from: { bottom: 100, opacity: 0 },
     to: { bottom: 0, opacity: 1 },
-    reset: true
+    // immediate: true,
+    // reset: true,
+    // reverse: true,
   });
 
   const plus = (currentRawNumber, number = 1) => {
@@ -38,13 +42,14 @@ const AnimatedCounter = () => {
     setNumberArray(numberToArray(newNumber));
   };
 
-  const updateDelay = value => {
-    setDelay(value);
+  const updateInterval = (value, v = plus) => {
+    const newInterval = (v === plus ? value : -value)
+    setTotalIncrement(newInterval);
   };
 
   useInterval(
     () => {
-      plus(rawNumber, 1);
+      plus(rawNumber, parseInt(totalIncrement, 10));
     },
     isRunning ? delay : null
   );
@@ -89,7 +94,7 @@ const AnimatedCounter = () => {
           {isRunning ? (
             <React.Fragment>
               <span
-                class="spinner-grow text-light spinner-grow-sm position-relative"
+                className="spinner-grow text-light spinner-grow-sm position-relative"
                 role="status"
               />
               Stop Interval
@@ -99,14 +104,14 @@ const AnimatedCounter = () => {
           )}
         </Button>
         <DropdownButton
-          onSelect={eventKey => updateDelay(eventKey)}
+          onSelect={eventKey => updateInterval(eventKey)}
           as={ButtonGroup}
           title="Interval Delay"
           id="bg-nested-dropdown"
         >
-          <Dropdown.Item eventKey="1000">1/sec</Dropdown.Item>
-          <Dropdown.Item eventKey="500">2/sec</Dropdown.Item>
-          <Dropdown.Item eventKey="200">5/sec</Dropdown.Item>
+          <Dropdown.Item eventKey={1}>1/sec</Dropdown.Item>
+          <Dropdown.Item eventKey={2}>2/sec</Dropdown.Item>
+          <Dropdown.Item eventKey={5}>5/sec</Dropdown.Item>
         </DropdownButton>
       </ButtonGroup>
     </Card.Body>
