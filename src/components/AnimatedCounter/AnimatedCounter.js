@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Card, ButtonGroup, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Card,
+  ButtonGroup,
+  Button,
+  DropdownButton,
+  Dropdown
+} from "react-bootstrap";
 import { numberToArray } from "../../utils/numberToArray";
 import { useTrail, animated } from "react-spring";
 import useInterval from "../../utils/useInterval";
@@ -32,22 +38,16 @@ const AnimatedCounter = () => {
     setNumberArray(numberToArray(newNumber));
   };
 
+  const updateDelay = value => {
+    setDelay(value);
+  };
+
   useInterval(
     () => {
-      // Your custom logic here
       plus(rawNumber, 1);
     },
     isRunning ? delay : null
   );
-
-  // useEffect(() => {
-  //   const timer = window.setInterval(() => {
-  //     plus(rawNumber, 1); // <-- Change this line!
-  //   }, 1000);
-  //   return () => {
-  //     window.clearInterval(timer);
-  //   };
-  // });
 
   return (
     <Card.Body>
@@ -83,7 +83,7 @@ const AnimatedCounter = () => {
         </Button>
         <Button
           onClick={() => setIsRunning(isRunning ? false : true)}
-          className=""
+          className="mr-1"
           variant="primary"
         >
           {isRunning ? (
@@ -98,6 +98,16 @@ const AnimatedCounter = () => {
             "Start Interval"
           )}
         </Button>
+        <DropdownButton
+          onSelect={eventKey => updateDelay(eventKey)}
+          as={ButtonGroup}
+          title="Interval Delay"
+          id="bg-nested-dropdown"
+        >
+          <Dropdown.Item eventKey="1000">1/sec</Dropdown.Item>
+          <Dropdown.Item eventKey="500">2/sec</Dropdown.Item>
+          <Dropdown.Item eventKey="200">5/sec</Dropdown.Item>
+        </DropdownButton>
       </ButtonGroup>
     </Card.Body>
   );
