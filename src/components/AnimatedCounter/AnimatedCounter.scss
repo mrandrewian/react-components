@@ -3,11 +3,22 @@
   .card-text {
     background: var(--gray);
     font-size: 80px;
+    line-height: 80px;
+
+    .number-container {
+      overflow: hidden;
+    }
 
     span {
-      opacity: .1;
-      transition: 1s opacity;
+      position: relative;
+      will-change: bottom, opacity;
     }
+  }
+
+  .spinner-grow {
+    margin-bottom: 2px;
+    margin-left: -16px;
+    right: 10px;
   }
 
 }
